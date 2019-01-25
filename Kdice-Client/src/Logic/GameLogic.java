@@ -6,6 +6,8 @@ import Models.PlayerModel;
 import java.awt.*;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameLogic
 {
@@ -112,13 +114,123 @@ public class GameLogic
                         <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()) {
                     return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x + 1) + " " + player.getMyField().get(i).y;
                 }
-            } else if (player.getMyField().get(i).x == 4 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1) {
+                if (player.getMyField().get(i).y == 0 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y + 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 4 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 2 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 1 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 3 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+            }
+
+
+
+            else if (player.getMyField().get(i).x == 4 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1) {
                 if (board[player.getMyField().get(i).x - 1][player.getMyField().get(i).y].get_ownerId() != player.getId()
                         && board[player.getMyField().get(i).x - 1][player.getMyField().get(i).y].get_cubesNumber()
                         <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()) {
                     return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x - 1) + " " + player.getMyField().get(i).y;
                 }
-            } else if (player.getMyField().get(i).x == 3 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1) {
+                if (player.getMyField().get(i).y == 0 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y + 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 4 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 2 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 1 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 3 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+            }
+
+
+
+
+
+            else if (player.getMyField().get(i).x == 3 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1) {
                 if (board[player.getMyField().get(i).x - 1][player.getMyField().get(i).y].get_ownerId() != player.getId()
                         && board[player.getMyField().get(i).x - 1][player.getMyField().get(i).y].get_cubesNumber()
                         <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()) {
@@ -128,7 +240,63 @@ public class GameLogic
                         <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()) {
                     return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x + 1) + " " + player.getMyField().get(i).y;
                 }
-            } else if (player.getMyField().get(i).x == 2 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1) {
+                if (player.getMyField().get(i).y == 0 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y + 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 4 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 2 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 1 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 3 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+            }
+
+
+
+
+
+            else if (player.getMyField().get(i).x == 2 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1) {
                 if (board[player.getMyField().get(i).x - 1][player.getMyField().get(i).y].get_ownerId() != player.getId()
                         && board[player.getMyField().get(i).x - 1][player.getMyField().get(i).y].get_cubesNumber()
                         <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()) {
@@ -138,7 +306,62 @@ public class GameLogic
                         <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()) {
                     return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x + 1) + " " + player.getMyField().get(i).y;
                 }
-            }else if (player.getMyField().get(i).x == 1 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1) {
+                if (player.getMyField().get(i).y == 0 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y + 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 4 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 2 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 1 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 3 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+            }
+
+
+
+
+            else if (player.getMyField().get(i).x == 1 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1) {
                 if (board[player.getMyField().get(i).x - 1][player.getMyField().get(i).y].get_ownerId() != player.getId()
                         && board[player.getMyField().get(i).x - 1][player.getMyField().get(i).y].get_cubesNumber()
                         <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()) {
@@ -147,6 +370,56 @@ public class GameLogic
                         && board[player.getMyField().get(i).x + 1][player.getMyField().get(i).y].get_cubesNumber()
                         <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()) {
                     return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x + 1) + " " + player.getMyField().get(i).y;
+                }
+                if (player.getMyField().get(i).y == 0 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y + 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 4 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 2 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 1 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                }
+                if (player.getMyField().get(i).y == 3 && board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber() > 1){
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
+                    if(board[player.getMyField().get(i).x][player.getMyField().get(i).y + 1].get_ownerId() != player.getId()
+                            && board[player.getMyField().get(i).x][player.getMyField().get(i).y - 1].get_cubesNumber()
+                            <= board[player.getMyField().get(i).x][player.getMyField().get(i).y].get_cubesNumber()){
+                        return attackCommand + player.getMyField().get(i).x + " " + player.getMyField().get(i).y + " " + (player.getMyField().get(i).x) + " " + (player.getMyField().get(i).y - 1);
+                    }
                 }
             }
         }
@@ -155,6 +428,8 @@ public class GameLogic
 
     private static void getFields(FieldModel[][] board, PlayerModel player)
     {
+        List<Point> myField = new ArrayList<>();
+        player.setMyField(myField);
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 5; j++){
                 if(board[i][j].get_ownerId() == player.getId()){

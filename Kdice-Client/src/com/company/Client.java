@@ -40,7 +40,7 @@ public class Client {
             player.setId(GameLogic.setID(ID));
             System.out.println(ID);
 
-            while (counter < 10) {
+            while (counter < 100) {
                 //GENERATE BOARD FROM 25xCOMMAND
                 _board = GameLogic.genereteBoardFromStart(player);
                 String test = "";
