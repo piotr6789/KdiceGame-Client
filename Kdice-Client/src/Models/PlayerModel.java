@@ -4,6 +4,7 @@ import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerModel
@@ -13,7 +14,7 @@ public class PlayerModel
     private Socket clientSocket;
     private int Id;
     private String login;
-    private List<Point> myField;
+    private List<Point> myField = new ArrayList<>();
 
     public PlayerModel(DataInputStream inputStream, DataOutputStream outputStream, Socket clientSocket)
     {

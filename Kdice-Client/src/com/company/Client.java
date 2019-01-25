@@ -9,13 +9,14 @@ import java.io.*;
 import java.net.*;
 
 public class Client {
-    private static int counter = 0;
     private static  FieldModel[][] _board = new FieldModel[5][5];
+    public static String orderServer = "6786786734";
+    public static int counter = 0;
 
-    public static void main(String[] args)
-    {
-        try
-        {
+    public static void main(String[] args) {
+
+        try {
+
             // getting localhost ip
             InetAddress ip = InetAddress.getByName("localhost");
 
@@ -29,53 +30,59 @@ public class Client {
             PlayerModel player = new PlayerModel(inputStream, outputStream, clientSocket);
 
             // login and generating board
-            while (counter == 0)
-            {
-                //LOGIN
-                System.out.println(player.getInputStream().readUTF());
-                String toSend = RandomGenerator.generateRandomString();
-                player.setLogin(toSend);
-                player.getOutputStream().writeUTF("LOGIN " + toSend);
-                String ID = player.getInputStream().readUTF();
-                player.setId(GameLogic.setID(ID));
-                System.out.println(ID);
 
-                //BOARD
-                String board = " ";
-                int start = 2;
-                int end = 17;
-                if(counter == 0) {
-                    for (int i = 0; i < 25; i++) {
-                        board = board + " " + player.getInputStream().readUTF();
-                        System.out.println(board.substring(start,end));
-                        start = start + 16;
-                        end = end + 16;
+            //LOGIN
+            System.out.println(player.getInputStream().readUTF());
+            String toSend = RandomGenerator.generateRandomString();
+            player.setLogin(toSend);
+            player.getOutputStream().writeUTF("LOGIN " + toSend);
+            String ID = player.getInputStream().readUTF();
+            player.setId(GameLogic.setID(ID));
+            System.out.println(ID);
+
+            while (counter < 10) {
+                //GENERATE BOARD FROM 25xCOMMAND
+                _board = GameLogic.genereteBoardFromStart(player);
+                String test = "";
+                GameLogic gameLogic = new GameLogic(_board, player);
+                boolean end = false;
+                while (!end) {
+                    try {
+                        orderServer = player.getInputStream().readUTF();
+                        if (orderServer.equals("TWOJ RUCH")) {
+                            System.out.println(orderServer);
+                            _board = GameLogic.genereteBoardAfterAttack();
+                            player.getOutputStream().writeUTF(gameLogic.generateAttack(_board));
+                            test = player.getInputStream().readUTF();
+                            System.out.println(test);
+                            if (test.equals("OK")) {
+                                _board = gameLogic.genereteBoardAfterAttack();
+                            }
+                        }
+                        if (orderServer.charAt(0) == 'A') {
+                            System.out.println(orderServer);
+                        }
+                        if (orderServer.equals("KONIEC RUNDY")) {
+                            System.out.println(orderServer);
+                            end = true;
+                        }
+                        while (test.equals("OK")) {
+                            player.getOutputStream().writeUTF(gameLogic.generateAttack(_board));
+                            test = player.getInputStream().readUTF();
+                            System.out.println(test);
+                            if (test.equals("PASS")) {
+                                break;
+                            }
+                            _board = gameLogic.genereteBoardAfterAttack();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    counter++;
                 }
-                _board = GameLogic.genereteBoard(board);
+                counter++;
             }
-
-            try{
-                String move = player.getInputStream().readUTF();
-                if(move.equals("TWOJ RUCH")){
-                    System.out.println(move);
-                    player.getOutputStream().writeUTF(GameLogic.generateAttack(_board, player));
-                }
-            }
-            catch(Exception e){
-
-            }
-
-
-            // closing resources
-//            scanner.close();
-//            inputStream.close();
-//            outputStream.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Nie znaleziono serwera.");
         }
     }
 }
