@@ -526,6 +526,15 @@ public class GameLogic
         return _board;
     }
 
+    public static void printBoard2() throws IOException {
+
+            for (int i = 0; i < 5 ; i++) {
+                for (int j = 0 ; j < 5 ; j++) {
+                    player.getOutputStream().writeUTF("PLANSZA " + i + " " + j + " " + board[i][j].get_ownerId() + " " + board[i][j].get_cubesNumber());
+                }
+            }
+        }
+
     public FieldModel[][] get_board() {
         return board;
     }
